@@ -1,6 +1,6 @@
-import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import Image from "./Image";
 
 const menuLinks = [
   { id: 1, name: "Homepage", link: "/", icon: "/icons/home.svg" },
@@ -22,7 +22,7 @@ const LeftBar = () => {
       <div className="flex flex-col gap-4 text-lg items-center xxl:items-start">
         {/* LOGO */}
         <Link href={"#"} className="p-2 rounded-full hover:bg-[#181818]">
-          <Image src="icons/logo.svg" alt="#" width={24} height={24}></Image>
+          <Image path="icons/logo.svg" alt="#"  w={24} h={24}></Image>
         </Link>
         {/* Menu List */}
         <div className="flex flex-col gap-4 ">
@@ -33,9 +33,9 @@ const LeftBar = () => {
               className="flex p-2 rounded-full hover:bg-[#181818] items-center gap-4 "
             >
               <Image
-                width={24}
-                height={24}
-                src={item.icon}
+                w={24}
+                h={24}
+                path={item.icon}
                 alt={item.name}
               ></Image>
               <span className="hidden xxl:inline">{item.name}</span>
@@ -48,9 +48,9 @@ const LeftBar = () => {
           className=" bg-white text-black rounded-full font-bold flex w-12 h-12 items-center justify-center xxl:hidden "
         >
           <Image
-            width={24}
-            height={24}
-            src="icons/post.svg"
+            w={24}
+            h={24}
+            path="icons/post.svg"
             alt="Post"
             className="text-white"
           ></Image>
@@ -63,17 +63,23 @@ const LeftBar = () => {
         </Link>
       </div>
       {/* User */}
-      <div className="flex items-center justify-center rounded-full ">
+      <div className="flex items-center justify-between rounded-full ">
         <div className="flex items-center justify-center gap-">
           <div className="w-10 h-10 relative rounded-full overflow-hidden">
-            <Image src={"/general/avatar.jpg"}  alt="logo" fill></Image>
+            <Image
+              path="/general/avatar.jpg"
+              alt="logo"
+              tr={true}
+              w={100}
+              h={100}
+            />
           </div>
           <div className=" flex-col hidden xxl:flex">
-            <span>Omar Sabri</span>
-            <span>@omarsabri.4</span>
+            <span className="font-bold ">Omar Sabri</span>
+            <span className="text-sm text-textGray">@omarsabri.4</span>
           </div>
         </div>
-        <div className="hidden xxl:inline">...</div>
+        <div className="hidden xxl:block cursor-pointer">...</div>
       </div>
     </div>
   );
