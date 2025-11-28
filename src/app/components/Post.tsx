@@ -2,8 +2,23 @@ import React from "react";
 import Image from "./Image";
 import PostInfo from "./PostInfo";
 import PostInteraction from "./PostInteraction";
+import { imagekit } from "../utils";
 
-const Post = () => {
+const Post = async () => {
+  const getFiledData = async (fileId: string): Promise<unknown> => {
+    return new Promise((resolve, reject) => {
+      imagekit.getFileDetails(fileId,function (error, result) {
+        if (error) {
+          console.error(error);
+          reject(error);
+        } else {
+          resolve(result);
+        }
+      });
+    });
+  };
+
+  const fileDetails =await getFiledData("124553rfs");
   return (
     <div className="p-4 border-y-[1px] border-borderGray">
       {/* POST TYPE */}
@@ -25,12 +40,7 @@ const Post = () => {
       <div className="flex gap-4 ">
         {/* AVATAR */}
         <div className="relative w-10 h-10 rounded-full overflow-hidden ">
-          <Image
-            path="/general/avatar.jpg"
-            alt="logo"
-            w={100}
-            h={100}
-          ></Image>
+          <Image path="/general/avatar.jpg" alt="logo" w={100} h={100}></Image>
         </div>
         {/* Contnet */}
         <div className="flex-1 flex-col gap-2">
@@ -51,12 +61,7 @@ const Post = () => {
               minima voluptatibus. Modi sapiente magni dolore commodi neque
               laborum veniam ipsa!
             </p>
-            <Image
-              path="/general/post.jpeg"
-              alt="post"
-              w={600}
-              h={600}
-            ></Image>
+            <Image path="/general/post.jpeg" alt="post" w={600} h={600}></Image>
             <PostInteraction />
           </div>
         </div>
